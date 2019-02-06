@@ -165,6 +165,20 @@ eng_tdm = as.matrix(eng_tdm)
 eng_tdm1 <- eng_tdm[nchar(rownames(eng_tdm)) < 11,]
 
 ```
+This matrix now have the terms that, in the main sentiment data frame, have any value assign to them above 0 in alphabetical order and the total value of each emotion. To see how that looks like, lets check the first rows of the matrix with the function `head()` in your language. For instance, in Spanish this presents the a column with the `Terms` and the `Docs` that here corresponds to an emotion column: 
+```
+head(spa_tdm1)
+
+Docs
+Terms      1 2 3 4
+  agravio  1 0 1 0
+  ahogado  1 0 1 0
+  amargura 2 0 2 0
+  angustia 4 0 4 0
+  apenas   3 0 0 0
+  autor    1 0 1 1
+```
+
 Now, we can assign a name to each of the groups of words we have created above, in this case by the column name or emotion:
 For Spanish
 ```
@@ -187,18 +201,18 @@ For Spanish word cloud
 ```
 comparison.cloud(spa_tdm1, random.order = FALSE,
                  colors = c("green", "red", "orange", "blue"),
-                 title.size = 1, max.words = 250, scale = c(2.5, 0.4), rot.per = 0.4)
+                 title.size = 1, max.words = 50, scale = c(2.5, 1), rot.per = 0.4)
 ```
 
 For Portuguese
 ```
 comparison.cloud(por_tdm1, random.order = FALSE,
                  colors = c("green", "red", "orange", "blue"),
-                 title.size = 1, max.words = 250, scale = c(2.5, 0.4), rot.per = 0.4)
+                  title.size = 1, max.words = 50, scale = c(2.5, 1), rot.per = 0.4)
 ```
 For English
 ```
 comparison.cloud(eng_tdm1, random.order = FALSE,
                  colors = c("green", "red", "orange", "blue"),
-                 title.size = 1, max.words = 250, scale = c(2.5, 0.4), rot.per = 0.4)
+                 title.size = 1, max.words = 50, scale = c(2.5, 1), rot.per = 0.4)
 ```
