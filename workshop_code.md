@@ -165,7 +165,7 @@ eng_tdm = as.matrix(eng_tdm)
 eng_tdm1 <- eng_tdm[nchar(rownames(eng_tdm)) < 11,]
 
 ```
-This matrix now have the terms that, in the main sentiment data frame, have any value assign to them above 0 in alphabetical order and the total value of each emotion. To see how that looks like, lets check the first rows of the matrix with the function `head()` in your language. For instance, in Spanish this presents the a column with the `Terms` and the `Docs` that here corresponds to an emotion column: 
+This matrix now have the terms that, in the main sentiment data frame, have any value assign to them above 0 and the total value of each emotion. To see how that looks like, lets check the first rows of the matrix with the function `head()` in your language. For instance, in Spanish this presents the a column with the `Terms` and the `Docs` that here corresponds to an emotion column: 
 ```
 head(spa_tdm1)
 
