@@ -78,3 +78,127 @@ head(eng_sentiments_df)
 
 > Congratulations! You have done the results of the sentiment analyis. Now, what can we do with them? 
 
+## Visualize overall emotions of the text
+To see what are the most or least present emotions on the text, we can create a barplot. Again choose the one that goes with the language of the text you have analyzed to avoid doing any changes for now: 
+For Spanish:
+```
+barplot(
+  colSums(prop.table(spa_sentiments_df[, 1:8])), 
+  space = 0.2,
+  horiz = FALSE, 
+  cex.names = 0.7, 
+  las = 1, 
+  col=brewer.pal(n = 8, name = "Set3"),
+  main = "'Brevísima relación de la destrucción de las Indias'", 
+  xlab="emociones", ylab = NULL)
+```
+For Portuguese:
+```
+barplot(
+  colSums(prop.table(por_sentiments_df[, 1:8])), 
+  space = 0.2,
+  horiz = FALSE, 
+  cex.names = 0.7, 
+  las = 1, 
+  col=brewer.pal(n = 8, name = "Set3"),
+  main = "'Brevíssima Relação da Destruição das Índias'", 
+  xlab="emoçãos", ylab = NULL)
+```
+For English: 
+```
+barplot(
+  colSums(prop.table(eng_sentiments_df[, 1:8])), 
+  space = 0.2,
+  horiz = FALSE, 
+  cex.names = 0.7, 
+  las = 1, 
+  col=brewer.pal(n = 8, name = "Set3"),
+  main = "'A Short Account of the Destruction of the Indies'", 
+  xlab="emoçãos", ylab = NULL)
+```
+Although this information is already telling us "how much" sadness there is in the text, it is also usefull to check what words and at what rate are present in the text for each or some emotions. To do this, we can create a word cloud! Here I am only going to check for 4 emotions, but you could add more, take out some, or change some emotion for another. 
+First, we create a character vector that combines all the words that, in the sentiment data frame and a few of the columns are noted as having a greater than 0 value. Then we create a vector with the words as a corpus. 
+For Spanish: 
+```
+spa_emotions_cloud = c(
+  paste(spa_vector[spa_sentiments_df$sadness> 0], collapse = " "),
+  paste(spa_vector[spa_sentiments_df$joy > 0], collapse = " "),
+  paste(spa_vector[spa_sentiments_df$anger > 0], collapse = " "),
+  paste(spa_vector[spa_sentiments_df$trust > 0], collapse = " "))
+spa_corpus = Corpus(VectorSource(spa_emotions_cloud))
+class(spa_corpus)
+```
+For Portuguese: 
+```
+por_emotions_cloud = c(
+  paste(por_vector[por_sentiments_df$sadness> 0], collapse = " "),
+  paste(por_vector[por_sentiments_df$joy > 0], collapse = " "),
+  paste(por_vector[por_sentiments_df$anger > 0], collapse = " "),
+  paste(por_vector[por_sentiments_df$trust > 0], collapse = " "))
+por_corpus = Corpus(VectorSource(por_emotions_cloud))
+class(por_corpus)
+```
+For English: 
+```
+eng_emotions_cloud = c(
+  paste(eng_vector[eng_sentiments_df$sadness> 0], collapse = " "),
+  paste(eng_vector[eng_sentiments_df$joy > 0], collapse = " "),
+  paste(eng_vector[eng_sentiments_df$anger > 0], collapse = " "),
+  paste(eng_vector[eng_sentiments_df$trust > 0], collapse = " "))
+eng_corpus = Corpus(VectorSource(eng_emotions_cloud))
+class(eng_corpus)
+```
+We still can't generate the wordcloud. We need to create a matrix of terms from our corpus. 
+First, create a new object with the function `TermDocumentMatrix()` from your corpus of words. 
+```
+spa_tdm = TermDocumentMatrix(spa_corpus)
+por_tdm = TermDocumentMatrix(por_corpus)
+eng_tdm = TermDocumentMatrix(eng_corpus)
+```
+Apply the `as.matrix` function to convert as matrix:  
+```
+spa_tdm = as.matrix(spa_tdm)
+spa_tdm1 <- spa_tdm[nchar(rownames(spa_tdm)) < 11,]
+por_tdm = as.matrix(por_tdm)
+por_tdm1 <- por_tdm[nchar(rownames(por_tdm)) < 11,]
+eng_tdm = as.matrix(eng_tdm)
+eng_tdm1 <- eng_tdm[nchar(rownames(eng_tdm)) < 11,]
+
+```
+Now, we can assign a name to each of the groups of words we have created above, in this case by the column name or emotion:
+For Spanish
+```
+colnames(spa_tdm) = c('tristeza', 'felicidad', 'enfado', 'confianza')
+colnames(spa_tdm1) <- colnames(spa_tdm)
+```
+For Portuguese
+```
+colnames(por_tdm) = c('tristeza', 'felicidade', 'aborrecimento', 'confiança')
+colnames(por_tdm1) <- colnames(por_tdm)
+```
+For English
+```
+colnames(eng_tdm) = c('sadness', 'joy', 'anger', 'trust')
+colnames(eng_tdm1) <- colnames(eng_tdm)
+```
+
+Finally, we can plot it:
+For Spanish word cloud
+```
+comparison.cloud(spa_tdm1, random.order = FALSE,
+                 colors = c("green", "red", "orange", "blue"),
+                 title.size = 1, max.words = 250, scale = c(2.5, 0.4), rot.per = 0.4)
+```
+
+For Portuguese
+```
+comparison.cloud(por_tdm1, random.order = FALSE,
+                 colors = c("green", "red", "orange", "blue"),
+                 title.size = 1, max.words = 250, scale = c(2.5, 0.4), rot.per = 0.4)
+```
+For English
+```
+comparison.cloud(eng_tdm1, random.order = FALSE,
+                 colors = c("green", "red", "orange", "blue"),
+                 title.size = 1, max.words = 250, scale = c(2.5, 0.4), rot.per = 0.4)
+```
