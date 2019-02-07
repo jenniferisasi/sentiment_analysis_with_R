@@ -153,6 +153,12 @@ eng_emotions_cloud = c(
 eng_corpus = Corpus(VectorSource(eng_emotions_cloud))
 class(eng_corpus)
 ```
+
+If you are working on Windows you need an extra line of code between emotions_cloud and Corpus making: 
+```
+spa_emotions_cloud <- iconv(spa_emotions_cloud, "UTF-8", "latin1")
+```
+
 We still can't generate the wordcloud. We need to create a matrix of terms from our corpus. 
 First, create a new object with the function `TermDocumentMatrix()` from your corpus of words. 
 ```
