@@ -33,6 +33,11 @@ For English:
 ```
 eng_string <- get_text_as_string("/Users/Jennifer/Desktop/sentiment_analysis_with_R-master/destruction.txt")
 ```
+If you are working on Windows, load the text in Spanish or English this way: 
+```
+namb <- scan(file='/Users/Lib-Checkout/Desktop/sentiment_analysis_with_R-master/destruccion.txt', fileEncoding='UTF-8',
+             what=character(), sep='\n', allowEscapes=T)
+```
 ## Divide the string of text into a vector of tokens
 The function `get_tokens` creates a list with the words in the text, ignoring punctuation. 
 
