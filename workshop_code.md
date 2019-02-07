@@ -21,6 +21,8 @@ library(tm)
 ## Load the texts(s) as a string of characters into a string type object 
 Choose which language you want to work with in this workshop load the text in said language. The same key 'spa', 'por' or 'eng' applies throughout the tutorial. 
 Make sure to change the path to the text that corresponds to your user or it won't work. 
+
+### In Mac
 For Spanish:
 ```
 spa_string <- get_text_as_string("/Users/Jennifer/Desktop/sentiment_analysis_with_R-master/destruccion.txt")
@@ -33,11 +35,24 @@ For English:
 ```
 eng_string <- get_text_as_string("/Users/Jennifer/Desktop/sentiment_analysis_with_R-master/destruction.txt")
 ```
-If you are working on Windows, load the text in Spanish or English this way: 
+
+### In Windows
+Windows system has an issue when reading accent marks, so we need to load the text as a file in UTF-8 format. 
+For Spanish:
 ```
-namb <- scan(file='/Users/Lib-Checkout/Desktop/sentiment_analysis_with_R-master/destruccion.txt', fileEncoding='UTF-8',
+spa_string <- scan(file='/Users/Jennifer/Desktop/sentiment_analysis_with_R-master/destruccion.txt', fileEncoding='UTF-8',
              what=character(), sep='\n', allowEscapes=T)
 ```
+For Portuguese: 
+```
+por_string <- scan(file='/Users/Jennifer/Desktop/sentiment_analysis_with_R-master/destruicao.txt', fileEncoding='UTF-8',
+             what=character(), sep='\n', allowEscapes=T)
+```
+For English: 
+```
+eng_string <- get_text_as_string("/Users/Jennifer/Desktop/sentiment_analysis_with_R-master/destruction.txt")
+```
+
 ## Divide the string of text into a vector of tokens
 The function `get_tokens` creates a list with the words in the text, ignoring punctuation. 
 
@@ -123,6 +138,10 @@ barplot(
 ```
 Although this information is already telling us "how much" sadness there is in the text, it is also usefull to check what words and at what rate are present in the text for each or some emotions. To do this, we can create a word cloud! Here I am only going to check for 4 emotions, but you could add more, take out some, or change some emotion for another. 
 First, we create a character vector that combines all the words that, in the sentiment data frame and a few of the columns are noted as having a greater than 0 value. Then we create a vector with the words as a corpus. 
+
+## Create a wordcloud with 4 emotions
+
+### In Mac 
 For Spanish: 
 ```
 spa_emotions_cloud = c(
@@ -153,10 +172,40 @@ eng_emotions_cloud = c(
 eng_corpus = Corpus(VectorSource(eng_emotions_cloud))
 class(eng_corpus)
 ```
-
-If you are working on Windows you need an extra line of code between emotions_cloud and Corpus making: 
+### In Windows 
+Again, at this point R needs an indication about the format of the characters that we are working with. This calls for an additional step when creating the corpus of words for the wordcloud.  
+For Spanish: 
 ```
+spa_emotions_cloud = c(
+  paste(spa_vector[spa_sentiments_df$sadness> 0], collapse = " "),
+  paste(spa_vector[spa_sentiments_df$joy > 0], collapse = " "),
+  paste(spa_vector[spa_sentiments_df$anger > 0], collapse = " "),
+  paste(spa_vector[spa_sentiments_df$trust > 0], collapse = " "))
 spa_emotions_cloud <- iconv(spa_emotions_cloud, "UTF-8", "latin1")
+spa_corpus = Corpus(VectorSource(spa_emotions_cloud))
+class(spa_corpus)
+```
+For Portuguese: 
+```
+por_emotions_cloud = c(
+  paste(por_vector[por_sentiments_df$sadness> 0], collapse = " "),
+  paste(por_vector[por_sentiments_df$joy > 0], collapse = " "),
+  paste(por_vector[por_sentiments_df$anger > 0], collapse = " "),
+  paste(por_vector[por_sentiments_df$trust > 0], collapse = " "))
+por_emotions_cloud <- iconv(por_emotions_cloud, "UTF-8", "latin1")
+por_corpus = Corpus(VectorSource(por_emotions_cloud))
+class(por_corpus)
+```
+For English: 
+```
+eng_emotions_cloud = c(
+  paste(eng_vector[eng_sentiments_df$sadness> 0], collapse = " "),
+  paste(eng_vector[eng_sentiments_df$joy > 0], collapse = " "),
+  paste(eng_vector[eng_sentiments_df$anger > 0], collapse = " "),
+  paste(eng_vector[eng_sentiments_df$trust > 0], collapse = " "))
+eng_emotions_cloud <- iconv(eng_emotions_cloud, "UTF-8", "latin1")
+eng_corpus = Corpus(VectorSource(eng_emotions_cloud))
+class(eng_corpus)
 ```
 
 We still can't generate the wordcloud. We need to create a matrix of terms from our corpus. 
@@ -227,3 +276,5 @@ comparison.cloud(eng_tdm1, random.order = FALSE,
                  colors = c("green", "red", "orange", "blue"),
                  title.size = 1, max.words = 50, scale = c(2.5, 1), rot.per = 0.4)
 ```
+
+## Plot line sentiment visualization
