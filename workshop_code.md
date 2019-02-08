@@ -181,7 +181,7 @@ spa_emotions_cloud = c(
   paste(spa_vector[spa_sentiments_df$joy > 0], collapse = " "),
   paste(spa_vector[spa_sentiments_df$anger > 0], collapse = " "),
   paste(spa_vector[spa_sentiments_df$trust > 0], collapse = " "))
-spa_emotions_cloud <- iconv(spa_emotions_cloud, "UTF-8", "latin1")
+spa_emotions_cloud <- iconv(spa_emotions_cloud, "latin1", "UTF-8")
 spa_corpus = Corpus(VectorSource(spa_emotions_cloud))
 class(spa_corpus)
 ```
@@ -192,7 +192,7 @@ por_emotions_cloud = c(
   paste(por_vector[por_sentiments_df$joy > 0], collapse = " "),
   paste(por_vector[por_sentiments_df$anger > 0], collapse = " "),
   paste(por_vector[por_sentiments_df$trust > 0], collapse = " "))
-por_emotions_cloud <- iconv(por_emotions_cloud, "UTF-8", "latin1")
+por_emotions_cloud <- iconv(por_emotions_cloud, "latin1", "UTF-8")
 por_corpus = Corpus(VectorSource(por_emotions_cloud))
 class(por_corpus)
 ```
@@ -203,7 +203,7 @@ eng_emotions_cloud = c(
   paste(eng_vector[eng_sentiments_df$joy > 0], collapse = " "),
   paste(eng_vector[eng_sentiments_df$anger > 0], collapse = " "),
   paste(eng_vector[eng_sentiments_df$trust > 0], collapse = " "))
-eng_emotions_cloud <- iconv(eng_emotions_cloud, "UTF-8", "latin1")
+eng_emotions_cloud <- iconv(eng_emotions_cloud, "latin1", "UTF-8")
 eng_corpus = Corpus(VectorSource(eng_emotions_cloud))
 class(eng_corpus)
 ```
