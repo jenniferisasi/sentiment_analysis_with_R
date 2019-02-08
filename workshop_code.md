@@ -134,7 +134,7 @@ barplot(
   las = 1, 
   col=brewer.pal(n = 8, name = "Set3"),
   main = "'A Short Account of the Destruction of the Indies'", 
-  xlab="emoçãos", ylab = NULL)
+  xlab="emotions", ylab = NULL)
 ```
 Although this information is already telling us "how much" sadness there is in the text, it is also usefull to check what words and at what rate are present in the text for each or some emotions. To do this, we can create a word cloud! Here I am only going to check for 4 emotions, but you could add more, take out some, or change some emotion for another. 
 First, we create a character vector that combines all the words that, in the sentiment data frame and a few of the columns are noted as having a greater than 0 value. Then we create a vector with the words as a corpus. 
