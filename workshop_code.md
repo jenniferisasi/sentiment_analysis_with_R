@@ -303,4 +303,10 @@ class(eng_valence)
 
 simple_plot(eng_valence)
 ```
-
+## Save your data
+If you want to save the data for future reference, you can write a csv file (comma separated value) with the `write.csv()`. Here, we are indicating that the function needs to save the data frame that contains the analysis of the 8 emotions and the 2 sentiments of each of the words in the text in a file with the extension `.csv`; additionally, to facilitate reading the data, we can add each of the words the data refers to by using the word vector as row names. 
+```
+write.csv(spa_sentiments_df, file = "spa_sentimientos.csv", row.names = spa_vector)
+write.csv(por_sentiments_df, file = "por_sentimientos.csv", row.names = por_vector)
+write.csv(eng_sentiments_df, file = "eng_sentimientos.csv", row.names = eng_vector)
+```
