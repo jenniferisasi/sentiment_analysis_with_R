@@ -278,3 +278,29 @@ comparison.cloud(eng_tdm1, random.order = FALSE,
 ```
 
 ## Plot line sentiment visualization
+To see the flow of sentiments, where value 1 is the most positive point and -1 the most negative moment in the text, we can plot the entire text by calculating its valence and visualize it with the `simple_plot()` function provided by `syuzhet`.
+In Spanish: 
+```
+spa_valence <- (spa_sentiments_df[, 9]*-1) + spa_sentiments_df[, 10]
+plot(spa_valence)
+class(spa_valence)
+
+simple_plot(spa_valence)
+```
+In Portuguese: 
+```
+por_valence <- (por_sentiments_df[, 9]*-1) + por_sentiments_df[, 10]
+plot(por_valence)
+class(por_valence)
+
+simple_plot(por_valence)
+```
+In English: 
+```
+eng_valence <- (eng_sentiments_df[, 9]*-1) + eng_sentiments_df[, 10]
+plot(eng_valence)
+class(eng_valence)
+
+simple_plot(eng_valence)
+```
+
