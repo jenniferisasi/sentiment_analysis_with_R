@@ -257,20 +257,20 @@ colnames(eng_tdm1) <- colnames(eng_tdm)
 ```
 
 Finally, we can plot it:
-For Spanish word cloud
+For Spanish:
 ```
 comparison.cloud(spa_tdm1, random.order = FALSE,
                  colors = c("green", "red", "orange", "blue"),
                  title.size = 1, max.words = 50, scale = c(2.5, 1), rot.per = 0.4)
 ```
 
-For Portuguese
+For Portuguese:
 ```
 comparison.cloud(por_tdm1, random.order = FALSE,
                  colors = c("green", "red", "orange", "blue"),
                   title.size = 1, max.words = 50, scale = c(2.5, 1), rot.per = 0.4)
 ```
-For English
+For English:
 ```
 comparison.cloud(eng_tdm1, random.order = FALSE,
                  colors = c("green", "red", "orange", "blue"),
