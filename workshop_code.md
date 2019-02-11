@@ -314,5 +314,7 @@ write.csv(eng_sentiments_df, file = "eng_sentimientos.csv", row.names = eng_vect
 ### Dataset Citation
 The raw text for the dataset of this workshop was prepared by Jennifer Isasi from the following sources: 
 Las Casas, Bartolomé de (1552). *Brevísima relación de la destrucción de las Indias*. Ed. José Miguel Martínez Torrejón. *Biblioteca Virtual Miguel de Cervantes*. Retrieved January 15, 2019, from http://www.cervantesvirtual.com/obra-visor/brevsima-relacin-de-la-destruccin-de-las-indias-0/html/847e3bed-827e-4ca7-bb80-fdcde7ac955e_18.html
+
 Las Casas, Bartolomé de (1689). *A Short Account of the Destruction of the Indies*. *Project Gutenberg*. Retrieved January 20, 2019, from http://www.gutenberg.org/ebooks/20321.
+
 Las Casas, Bartolomé de (1984). *A Destruição das Índias Ocidentais*. Trad. Heraldo Barbuy. *Internet Archive*. Retrieved January 25, 2019, from https://archive.org/details/OParasoDestruudoBartolomeuDeLasCasas/page/n13
