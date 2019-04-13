@@ -277,6 +277,10 @@ comparison.cloud(eng_tdm1, random.order = FALSE,
                  title.size = 1, max.words = 50, scale = c(2.5, 1), rot.per = 0.4)
 ```
 
+
+![Nube de emociones de Brevísima relación de la destrucción de las indias](/destruccion_cloud.png)
+
+
 ## Plot line sentiment visualization
 To see the flow of sentiments, where value 1 is the most positive point and -1 the most negative moment in the text, we can plot the entire text by calculating its valence and visualize it with the `simple_plot()` function provided by `syuzhet`.
 In Spanish: 
@@ -303,6 +307,8 @@ class(eng_valence)
 
 simple_plot(eng_valence)
 ```
+![Desarrollo de las emociones de Brevísima relación de la destrucción de las indias](/destruccion_plot.png)
+
 ## Save your data
 If you want to save the data for future reference, you can write a csv file (comma separated value) with the `write.csv()`. Here, we are indicating that the function needs to save the data frame that contains the analysis of the 8 emotions and the 2 sentiments of each of the words in the text in a file with the extension `.csv`; additionally, to facilitate reading the data, we can add each of the words the data refers to by using the word vector as row names. 
 ```
